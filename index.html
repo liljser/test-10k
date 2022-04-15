@@ -8,5 +8,28 @@
   </head>
   <body>
     <h1>10k</h1>
+    <script>
+      async function doFetch() {
+        try {
+          const response = await fetch(
+            'https://qvazi.github.io/test-10k/data/0',
+          );
+          if (!response.ok) {
+            console.log('---notok', response);
+            const error = new Error('not ok');
+            error.status = response.status;
+            error.statusText = response.statusText;
+            throw error;
+          }
+
+          const data = await response.json();
+          document.body.append(JSON.stringify(data));
+        } catch (error) {
+          console.log(error.message, error?.statusText);
+        }
+      }
+
+      doFetch();
+    </script>
   </body>
 </html>
